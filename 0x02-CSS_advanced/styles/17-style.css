@@ -75,7 +75,7 @@ a:active {
 }
 
 .card-category {
-	color: color-primary;
+	color: var(--color-primary);
 }
 
 .section {
@@ -93,7 +93,7 @@ a:active {
 
 .section-footer {
 	padding: var(--section-footer-padding);
-	halign: var(--section-footer-align);
+	text-align: var(--section-footer-align);
 }
 
 .section-title {
@@ -105,7 +105,7 @@ a:active {
 }
 
 .section-tagline {
-	color: color-primary;
+	color: var(--color-primary);
 	font-family: var(--font-family-title);
 	text-transform: var(--section-tagline-transform);
 	font-weight: var(--font-weight-bold);
