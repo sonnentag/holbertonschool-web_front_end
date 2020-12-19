@@ -1,0 +1,6 @@
+/* 8. Margin mixin */
+$b: 10px; 
+$d: 15px; 
+@mixin margin($val) { margin-left: $val; margin-right: $val;}
+body { @include margin($b); }
+div { @include margin($d); }
