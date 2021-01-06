@@ -7,3 +7,9 @@
 ### 03-styles.css
 ### 04-article.html
 ### 04-styles.css
+### 05-article.html
+### 05-styles.css
+### 06-article.html
+### 06-styles.css
+### 07-article.html
+### 07-styles.css
