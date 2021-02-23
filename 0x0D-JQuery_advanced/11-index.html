@@ -32,8 +32,13 @@
             $("form").last().append("<div></div>");
             $("div").last().append("<label></label>");
             $("div").last().append("<textarea></textarea>");
-            $("form").last().append("<button type="submit">Submit</button>");
+            $("form").last().append('<button type="submit">Submit</button>');
         }
+
+function sendForm() {
+            $("form").after('<p>About to send the query to the API</p>');
+
+}
 
         $(document).ready( () => {
             getData();
