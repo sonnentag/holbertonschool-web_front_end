@@ -39,7 +39,7 @@
 
             function getCookie(name) {
                 let cname = name + "=";
-                let ca = document.cookie.split(';');
+                let ca = document.cookie.split('; ');
                 for (let i = 0; i < ca.length; i++) {
                     let c = ca[i];
                     while (c.charAt(0) == ' ') {
@@ -52,12 +52,17 @@
                 return "";
             }
 
-function showCookies() {
-                let cookie = document.cookie.split(';');
-                let pele = document.createElement("p");
+            function showCookies() {
+                let eml = getCookie("email");
+                let fname = getCookie("firstname");
+                let pele = document.querySelector("p");
+                if(typeof(pele) != 'undefined' && pele != null)
+                    document.querySelector("p").remove();
 
-                document.body.append(pele)
-}
+                let p = document.createElement("p");
+                p.innerText = "Email: " + eml + " - Firstname: " + fname;
+                document.body.append(p);
+            }
         </script>
     </body>
 </html>
