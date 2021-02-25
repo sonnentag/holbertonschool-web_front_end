@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Task 7</title>
+    </head>
+    <body>
+
+        <script>
+
+            const availableItems = ['Shampoo', 'Soap', 'Sponge', 'Water']
+            const cart = getCartFromStorage();
+
+                function getCartFromStorage() {
+                    let cart = JSON.parse(sessionStorage.getItem('cart'));
+                    if (cart) {
+                        return cart;
+                    }
+                    return {};
+                }
+
+                function addItemToCart(item) {
+
+                    let cart = getCartFromStorage();
+
+                    if (cart[item]) {
+                        cart[item] += 1; 
+                    } else {
+                        cart[item] = 1;
+                    }
+
+                    window.sessionStorage.setItem("cart", JSON.stringify(cart));
+                    displayCart();
+	        }
+
+                function removeItemFromCart(item) {
+                    delete cart[item];
+                    window.sessionStorage.setItem("cart", JSON.stringify(cart));
+                    displayCart();
+                }
+
+                function clearCart() {
+                    sessionStorage.clear();
+                    displayCart();
+                }
+
+                function createStore() {
+
+                    let cart = getCartFromStorage();
+                    let h2 = document.createElement('h2');
+                    h2.textContent = "Available products: ";
+                    document.querySelector('body').appendChild(h2);
+                    let ul = document.createElement('ul');
+                    document.querySelector('body').appendChild(ul);
+
+                    for (let item of availableItems) {
+                        let li = document.createElement('li');
+                        li.textContent = item;
+                        li.addEventListener('click', function () {
+                            addItemToCart(item);
+                        });
+
+                        ul.appendChild(li);
+                    }
+                }
+
+                function displayCart() {
+                    let div = document.querySelector("div");
+
+                       if (document.getElementsByTagName("h2").length == 1) {
+                         let h2 = document.createElement("h2");
+                         h2.appendChild(document.createTextNode("Your cart:"));
+                         document.body.append(h2);
+                       }
+                       if (div) {
+                         let ul = document.querySelector("div ul");
+                         while (ul.firstChild) {
+                           ul.removeChild(ul.firstChild);
+                         }
+                       } else {
+                         let newdiv = document.createElement("div");
+                         document.body.append(newdiv);
+                       }
+
+                    updateCart();
+                }
+
+
+                function updateCart() {
+                    let div = document.querySelector("div");
+                    let cart = getCartFromStorage();
+                    let ul;
+
+                    if (!document.querySelector("div ul")) {
+                        ul = document.createElement("ul");
+                    } else {
+                        ul = document.querySelector("div ul");
+                    }
+
+                    if (Object.keys(cart).length == 0) {
+                        let li = document.createElement("li");
+                        li.appendChild(document.createTextNode("Your cart is empty"));
+                        ul.appendChild(li);
+                    } else {
+                        let li = document.createElement("li");
+                        let span = document.createElement("span");
+                        span.textContent = "Clear your cart";
+                        span.addEventListener('click', function () { clearCart(); });
+
+                        li.appendChild(span);
+                        ul.appendChild(li);
+                        for (const [x, y] of Object.entries(cart)) {
+                            let li = document.createElement("li");
+                            let span = document.createElement("span");
+                            span.onclick = function () { removeItemFromCart(x); };
+                            span.appendChild(document.createTextNode("(remove)"));
+                            li.append(`${x} X ${y}`);
+                            li.appendChild(span);
+                            ul.appendChild(li);
+                        }
+                    }
+                    if (!document.getElementsByTagName("ul")[1]) {
+                        div.appendChild(ul);
+                    }
+                }
+
+                if ('sessionStorage' in window) {
+                    createStore();
+                    displayCart();
+                } else {
+                    alert("Sorry, your browser does not support Web storage. Try again with a better one");
+            }
+
+        </script>
+
+    </body>
+</html>
