@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Task 0</title>
+        <link href="https://fonts.googleapis.com/css?family=Georgia" rel="stylesheet">
+        <style type='text/css'>
+            button {
+                color: black;
+            }
+            h1 {
+                font-family: Georgia, serif;
+            }
+            input {
+                border-radius: 0;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1><strong>Login to the website</strong></h1>
+        <input id="firstname" type="text" placeholder="Firstname"/>
+        <input id="email" type="text" placeholder="Email"/>
+        <button onclick="setCookies()">Log me in</button>
+        <h1>Cookies</h1>
+        <button onclick="showCookies()">Show the cookies</button>
+
+        <script type="application/javascript">
+
+            function setCookies() {
+                let fname = document.getElementById("firstname").value;
+                let email = document.getElementById("email").value;
+                document.cookie = "firstname=" + fname + ";"
+                document.cookie = "email=" + email + ";"
+            }
+
+            function showCookies() {
+                let cookie = document.cookie;
+                let pele = document.createElement("p");
+                pele.appendChild(document.createTextNode("Cookies: " + cookie));
+                document.body.appendChild(pele)
+            }
+
+        </script>
+    </body>
+</html>

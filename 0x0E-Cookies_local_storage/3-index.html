@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Task 2</title>
+        <link href="https://fonts.googleapis.com/css?family=Georgia" rel="stylesheet">
+        <style type='text/css'>
+            button {
+                color: black;
+            }
+            h1 {
+                font-family: Georgia, serif;
+            }
+            input {
+                border-radius: 0;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1><strong>Login to the website</strong></h1>
+        <input id="firstname" type="text" placeholder="Firstname"/>
+        <input id="email" type="text" placeholder="Email"/>
+        <button onclick="setCookies()">Log me in</button>
+        <h1>Cookies</h1>
+        <button onclick="showCookies()">Show the cookies</button>
+
+        <script type="application/javascript">
+
+            function setCookies() {
+                let fname = document.getElementById("firstname").value;
+                let email = document.getElementById("email").value;
+                let expire = (new Date())
+                    expire.setDate((new Date()).getDate()+10);
+                expire = expire.toUTCString();
+                document.cookie = "firstname=" + fname + "; expires=" + expire;
+                document.cookie = "email=" + email + "; expires=" + expire;
+            }
+
+            function getCookie(name) {
+                let cookies = document.cookie.split(";");
+                for (let c of cookies) {
+                    let x = c.split("=")
+                    if (x[0].trim() === name) return x[1];
+                }
+                return "";
+            }
+
+            function showCookies() {
+                let fname = getCookie("firstname");
+                let email = getCookie("email");
+                let p = document.createElement("p");
+                p.appendChild(document.createTextNode("Email: " + em + " - Firstname: " + fn));
+                document.body.appendChild(p)
+            }
+
+        </script>
+    </body>
+</html>
