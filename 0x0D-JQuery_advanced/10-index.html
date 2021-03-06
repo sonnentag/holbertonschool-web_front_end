@@ -19,19 +19,21 @@
                     $("p").last().append("<span></span>");
                     $("span").last().append("Post created with id " + data['id'] + ", title: " + data['title'] + ", author: " + data['author']);
                 };
-                function listPosts() {
-                    $.get("http://localhost:3000/posts", function(res, status) {
-                        if (status === "success") {
-                            for (let i in res) {
-                                addPostRow(res[i]);
-                            }
-                        } else alert("Server Error");
-                    }
-                    );
-                };
+		function listPosts() {
+			$.get('http://localhost:3000/posts')
+			.done(function(data) {
+				data.forEach(element => {
+					addPostRow(element)
+				});
+			})
+			.fail(function(){
+				alert('Server Error')
+			})
+		}
                 listPosts();
             });
 
         </script>
     </body>
 </html>
+
