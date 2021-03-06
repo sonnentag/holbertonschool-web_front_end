@@ -2,8 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Task 3</title>
+        <title>Task 4</title>
         <link href="https://fonts.googleapis.com/css?family=Georgia" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
         <style type='text/css'>
             button {
                 color: black;
@@ -25,7 +26,7 @@
             <h2>Login to the website</h2>
             <input id="firstname" type="text" placeholder="Firstname"/>
             <input id="email" type="text" placeholder="Email"/>
-            <button onclick="logMeIn()">Log me in</button>
+            <button onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
         </div>
 
         <script type="application/javascript">
@@ -40,29 +41,12 @@
             }
 
 
-            function logMeIn() {
-                let fname = document.getElementById("firstname").value;
-                let email = document.getElementById("email").value;
-                let d = new Date();
-                d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
-                let expires = "expires=" + d.toUTCString();
-                document.cookie = "firstname=" + fname + ";" + expires + ";path=/";
-                document.cookie = "email=" + email + ";" + expires + ";path=/";
-                showWelcomeMessageOrForm();
-            }
-
             function getCookie(name) {
-                let cname = name + "=";
-                let ca = document.cookie.split('; ');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c.substring(1);
-                    }
-                    if (c.indexOf(cname) == 0) {
-                        return c.substring(cname.length, c.length);
-                    }
+                let val = Cookies.get(name); 
+                if (val !== 'undefined') {
+                    return val;
                 }
+
                 return "";
             }
 
@@ -85,14 +69,19 @@
             }
 
             function deleteCookiesAndShowForm() {
-                    document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                    document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    Cookies.remove('firstname','email');
                     showForm();
                     document.location.reload();
             }
 
+            function setCookiesAndShowWelcomeMessage() {
+                Cookies.set('firstname', document.getElementById('firstname').value);
+                Cookies.set('email', document.getElementById('email').value);
+                showWelcomeMessageOrForm();
+            }
+
             function showWelcomeMessageOrForm() {
-                let fname = getCookie("firstname");
+                let fname = Cookies.get('firstname');
                 let h1 = document.createElement('h1');
                 let wt = document.createTextNode("Welcome: " + fname + " ");
                 let fout = document.createElement('span');
