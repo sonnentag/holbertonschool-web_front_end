@@ -1,4 +1,5 @@
 /* SUMMARY
+ * /* Card WORK section, there is a .card-work .card-title a with opacity at 0
 1. GLOBAL
 2. LAYOUT
 3. SECTION
@@ -667,6 +668,7 @@ ul.row {
   display: block;
   text-decoration: none;
   padding-top: 45%;
+  opacity: 0;
 }
 
 .card-work .card-title a::after {
